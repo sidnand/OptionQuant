@@ -94,6 +94,10 @@ strategy = oq.OptionStrategy([option1, option2], np.linspace(130, 150, 1000))
 oq.StrategyPlotter.plot_strategy_pnl(strategy.strategy_pnl_values, strategy.break_even_underlying)
 ```
 
+## Development
+
+OptionQuant is using Python 3.13.0. After cloning the repo, setting up a virtual environment and installing the dependencies, read the Module section below to understand the structure of the package.
+
 ## Modules
 
 ### option.py
