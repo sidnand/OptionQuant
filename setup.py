@@ -7,7 +7,7 @@ setup(
     author_email="snand233@gmail.com",
     description="A package for options trading strategies and analysis",
     long_description=open('README.md').read(),
-    ong_description_content_type="text/markdown",
+    long_description_content_type="text/markdown",
     url="https://github.com/sidnand/OptionQuant",
     packages=find_packages(),
     install_requires=[
