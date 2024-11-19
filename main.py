@@ -1,28 +1,21 @@
-from quant import *
-from plot import *
+import numpy as np
 
-TRADING_DAYS = 252
+import OptionQuant as oq
 
-sigma = 0.89
+# Define options (<option_type>, <strike>, <underlying_price>, <sigma>, <time_to_expiry>, <dividend_yield>, <risk_free_rate>, <is_american>)
+option1 = oq.Option('put', 140, 141, 8.15, 2, 1.07, 0.75, True)
+option2 = oq.Option('call', 140, 142, 5.80, 2, 1.07, 0.75)
 
-underlying_price = 141.98
-strike_price = 141
-risk_free_rate = 0.045
-days_to_expiration = 7
-expiry = days_to_expiration / TRADING_DAYS
-option_type = 'put' # call or put
+# Strategy
+strategy = oq.OptionStrategy([option1, option2],
+                             np.linspace(130, 150, 1000))
 
-# ('option_type', strike_price, premium_paid/received, time_to_expiry, contract_fee).
-strategy = [
-    ('put', 141, 6.50, expiry, 0.75),
-    ('call', 142, 7.10, expiry, 0.75),
-    ('call', 142, 11, expiry, 0.75),
-]
+# get binomial model price
+price_option1 = oq.OptionPricer.binomial_model(option1, 0.04)
+price_option2 = oq.OptionPricer.binomial_model(option2, 0.04)
 
-option_price = binomial_model(underlying_price, strike_price, risk_free_rate, expiry, sigma, 1000, option_type)
-print(f"The price of the option is: {option_price:.2f}")
+# price_option1_black_scholes = oq.OptionPricer.black_scholes_merton(option1, 0.04)
+# price_option2_black_scholes = oq.OptionPricer.black_scholes_merton(option2, 0.04)
 
-plot_greeks_vs_underlying(underlying_price, strike_price, risk_free_rate, expiry, sigma, 1000, option_type)
-plot_pnL(strategy, underlying_price, price_range=None)
-
-plt.show()
+# Plot
+strategy.plot()
