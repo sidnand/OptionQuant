@@ -7,9 +7,7 @@ OptionQuant is a Python package designed to assist in the pricing and analysis o
 To install `OptionQuant`, you can either clone this repository or install it directly from PyPI (if published):
 
 ```bash
-git clone https://github.com/yourusername/OptionQuant.git
-cd OptionQuant
-python setup.py install
+pip install OptionQuant
 ```
 
 ## Usage
